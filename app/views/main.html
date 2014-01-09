@@ -1,0 +1,41 @@
+<section class="timer">
+    timer
+</section>
+
+
+<section class="counter">
+    
+    <ul>
+        <li class="counter__display">
+            Solved: {{solved}}
+        </li>
+        <li class="counter__display">
+            Guesses: {{guessCount}}
+        </li>
+    </ul>
+
+</section>
+
+
+<ul class="cards">
+  <li ng-repeat="card in cards" ng-click="check(card)" class="card {{card.status}} {{card.value}}">
+        
+        <div class="flip-container">
+            <div class="flipper">
+                <div class="front"> 
+                <i class="fa fa-question-circle"></i>
+                </div>
+                <div class="back">
+                    <i class="fa {{card.icon}}"></i>
+                </div>
+            </div>
+        </div>
+
+  </li>
+</ul>
+
+<div ng-if="!gameId">
+  <input type="text" name="name" id="name-field" placeholder="name" />
+  <input type="text" name="email" id="email-field" placeholder="email" />
+  <input type="button" value="submit" ng-click="doSubmit()"/>
+</div>
