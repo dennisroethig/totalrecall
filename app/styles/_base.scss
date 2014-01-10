@@ -24,8 +24,9 @@ body {
 
 .content_module {
 
+    color: #fff;
     max-width: 280px;
-    margin: 2em auto 0 auto;
+    margin: 1.5em auto 0 auto;
 
 }
 
@@ -45,22 +46,28 @@ body {
 }
 
 h1 {
-    font-size: 1.8em;
+    font-size: 2.2em;
+    margin-bottom: 0.3em;
 }
 h2 {
     font-size: 1.4em;
+    margin-bottom: 0.1em;
 }
 h3 {
     font-size: 1.2em;
+    margin-bottom: 0.1em;
 }
 h4 {
     font-size: 1.1em;
+    margin-bottom: 1em;
 }
 h5 {
     font-size: 1em;
+    margin-bottom: 1em;
 }
 h6 {
     font-size: 0.8em;
+    margin-bottom: 1em;
 }
 
 input[type="text"] {
