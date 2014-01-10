@@ -1,3 +1,11 @@
 .timer {
-	background-color: green;
+	height: 5px;
+	width: 100%;
+}
+
+.timer__progress {
+	background-color: $LIGHTNING-BLUE;
+	height: 100%;
+	width: 30%;
+	// transition: 2.5s;
 }

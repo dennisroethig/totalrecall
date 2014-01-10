@@ -1,0 +1,57 @@
+<section class="timer">
+
+    <div class="timer__progress" style="width:{{timerProgress}}%;"></div>
+
+</section>
+
+
+<section class="scoreboard">
+
+    <div class="scoreboard_display">
+        <span>Level {{level}}</span>
+    </div>
+    <br />
+    <div class="scoreboard_display scoreboard_display--points">
+        <span class="scoreboard_points">{{pointsTotal|points}}</span>
+    </div>
+
+</section>
+
+<section class="cardboard">
+
+    <ul class="cardboard_inner">
+
+        <li ng-repeat="card in cards" ng-click="checkCard(card)" class="card card--{{card.state}}" >
+
+            <div class="card__outer-frame card--{{card.state}}__outer-frame">
+
+                <div class="card__inner-frame card--{{card.state}}__inner-frame">
+
+                    <div class="card__side card--{{card.state}}__side card__side--front">
+                        <i class="fa fa-question-circle card__icon card--{{card.state}}__icon"></i>
+                    </div>
+
+                    <div class="card__side card--{{card.state}}__side card__side--back">
+                        <i class="fa {{card.icon}} card__icon card--{{card.state}}__icon"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </li>
+
+    </ul>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+

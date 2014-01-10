@@ -9,13 +9,18 @@ angular.module('totalrecallApp', [
     
     $routeProvider
 
-        .when('/', {
-            templateUrl: 'views/main.html',
-            controller: 'MainCtrl'
+        .when('/play', {
+            templateUrl: 'views/game.html',
+            controller: 'GameCtrl'
+        })
+
+        .when('/new', {
+            templateUrl: 'views/newGame.html',
+            controller: 'NewGameCtrl'
         })
 
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/new'
         });
 
 

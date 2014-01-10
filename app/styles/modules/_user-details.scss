@@ -1,0 +1,27 @@
+.user-details {
+	// background-color: red;
+	padding-top: 3em;
+}
+
+.user-details__input {
+	width: 100%;
+	margin-bottom: 0.5em;
+}
+
+.user-details__button {
+	width: 100%;
+	background-color: $LIGHTNING-BLUE;
+	border: none;
+	border-radius: 3px;
+    padding: 0.5em 0.4em;
+    font-size: 1em;
+
+    &:hover {
+    	@include box-shadow(#fff 0 0 5px);
+    }
+
+    &:active {
+		background-color: red;
+    }
+
+}

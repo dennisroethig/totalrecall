@@ -1,7 +1,17 @@
-.counter {
-    background-color: red;
+.scoreboard {    
+    text-align: center;
+    color: #fff;
+    padding: 1em;
 }
 
-.counter__display {
-    color: #fff;
+.scoreboard_display {
+	display: inline-block;
+	padding: 0.1em 0;
+	font-size: 2em;
+    text-align: center;
+}
+
+.scoreboard_display--points {
+	padding: 0.1em 0 0.1em 0.6em;
+	letter-spacing: 0.6em;
 }
