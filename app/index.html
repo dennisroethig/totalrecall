@@ -9,28 +9,36 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <!-- endbower -->
     <!-- endbuild -->
 
     <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
 
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="styles/font-awesome.min.css">
-    <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+
   </head>
+
   <body ng-app="totalrecallApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="game-container" ng-view=""></div>
 
-    <div class="overlay"></div>
+    <div ng-controller="OverlayCtrl" class="overlay" ng-class="className">
+        
+        <section class="overlay__content content_module">
+            <h1 ng-if="title" class="overlay__title">{{title}}</h1>
+            <h3 ng-if="text" class="overlay__text">{{text}}</h3>
+            <input ng-if="cta" ng-click="ctaClicked(cta.event)" value="{{cta.text}}" class="button overlay__button {{cta.className}}" />
+        </section>
+
+    </div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -39,13 +47,13 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         
         <script src="scripts/factories/totalRecallApi.js"></script>
@@ -57,7 +65,9 @@
 
         <script src="scripts/controllers/game.js"></script>
         <script src="scripts/controllers/newGame.js"></script>
-        <!-- endbuild -->
+        <script src="scripts/controllers/overlay.js"></script>
+    <!-- endbuild -->
+
 </body>
 </html>
 
