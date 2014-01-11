@@ -1,8 +1,15 @@
 'use strict';
 
+/*  
+ *  New Game Controller
+ *  - Start a new Game
+ *  - Assign name and email from inputs
+ *  - Submit to API and receive game information
+ */
+
 angular.module('totalrecallApp')
 
-    .controller('NewGameCtrl', function ($scope, $location, TotalRecallApi, GameInfo) {
+    .controller('NewGameCtrl', function ($scope, $rootScope, $location, TotalRecallApi, GameInfo) {
 
         $scope.userName = 'dennis';
         $scope.userEmail = 'roethig.dennis@gmail.com';
@@ -13,16 +20,21 @@ angular.module('totalrecallApp')
                 email = $scope.userEmail,
                 request;
 
+            $rootScope.$broadcast('overlay:show', {
+                title: 'Loading...',
+                // text: 'Overlay text text text text text text',
+                // cta: {
+                //     text: 'button text',
+                //     className: 'primary',
+                //     event: 'overlay:hide'
+                // }
+            });
+
             if (name && email) {
 
                 request = TotalRecallApi.startGame(name, email);
 
                 request.then(function (response) {
-
-                    console.log('');
-                    console.log('----- GAME STARTED - ' + response.cards.length+ ' cards -----');
-                    console.log('>>>', name, email);
-                    console.log('>>>', response.gameId);
 
                     GameInfo.data = {
                         gameId: response.gameId,
@@ -30,6 +42,7 @@ angular.module('totalrecallApp')
                     };
 
                     $location.path('/play');
+                    $rootScope.$broadcast('overlay:hide', {});
 
                 });
 

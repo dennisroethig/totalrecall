@@ -16,8 +16,6 @@ angular.module('totalrecallApp')
             return;
         }
         
-
-
         $scope.level = 1;
         $scope.solved = 0;
         $scope.timerProgress = 0;
@@ -26,10 +24,6 @@ angular.module('totalrecallApp')
         $scope.pointsTotal = 10000;
 
         gameId = $scope.gameData.gameId;
-
-
-
-        // startTimer();
 
         Timer.start($scope);
 
