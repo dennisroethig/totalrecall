@@ -10,19 +10,5 @@
 }
 
 .user-details__button {
-	width: 100%;
-	background-color: $LIGHTNING-BLUE;
-	border: none;
-	border-radius: 3px;
-    padding: 0.5em 0.4em;
-    font-size: 1em;
-
-    &:hover {
-    	@include box-shadow(#fff 0 0 5px);
-    }
-
-    &:active {
-		background-color: red;
-    }
 
 }
