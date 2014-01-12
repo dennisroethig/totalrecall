@@ -1,12 +1,16 @@
 'use strict';
 
 /*
-    Start and reset Timer, to control Level activities
+ *  Timer
+ *  - Start Timer when games start
+ *  - Reset Timer if next card match is found before time runs out
+ *  - Speed increases with increasing game level
+ *  - If time runs out, 'game:over' event will be triggered
 */
 
 angular.module('totalrecallApp')
     
-    .factory('Timer', function () {
+    .factory('Timer', function ($rootScope) {
         
         var interval = 1000,
             timer;
@@ -32,11 +36,12 @@ angular.module('totalrecallApp')
 
                     }
 
-                    // if progress is complete, reset progress and deduct points
+                    // if progress is complete, end game
                     else {
-                        scope.timerProgress = 0;
-                        scope.level++;
-                        scope.pointsTotal = scope.pointsTotal - 1000;
+
+                        clearInterval(timer);
+                        $rootScope.$broadcast('game:over', {});
+
                     }
 
                     // apply changes to scope to make them visible

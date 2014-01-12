@@ -28,6 +28,12 @@ angular.module('totalrecallApp')
         Timer.start($scope);
 
 
+        $scope.$on('game:over', function(event) {
+
+            endGame();
+
+        });
+
         $scope.$watch('guessCount', function () {
 
             if ($scope.guessCount > 0) {
@@ -38,41 +44,13 @@ angular.module('totalrecallApp')
 
         $scope.$watch('solved' , function () {
 
-            var remainingCards,
-                request;
-
-            remainingCards = $scope.cards.filter(function( obj ) {
+            var remainingCards = $scope.cards.filter(function( obj ) {
                 return obj.resolved === false;
             });
 
             if (remainingCards.length === 2) {
 
-                remainingCards.forEach(function (card, key) {
-                    card.state = 'solved';
-                    card.resolved = true;
-                });
-
-                request = TotalRecallApi.endGame(remainingCards);
-                
-                request.then(function (response) {
-                    var message;
-
-                    if (response.success) {
-                        message = 'Your score: ' + $scope.score;
-                    } else {
-                        message = null; // currently not possible; needed when time can run out for user
-                    }
-
-                    $rootScope.$broadcast('overlay:show', {
-                        title: response.message,
-                        text: message,
-                        cta: {
-                            text: 'Start again',
-                            event: 'game:new'
-                        }
-                    });
-
-                });
+                endGame(remainingCards);
 
             }
 
@@ -112,6 +90,36 @@ angular.module('totalrecallApp')
 
         };
 
+        function endGame(remainingCards) {
+
+            var request;
+
+            remainingCards = remainingCards || $scope.cards;
+
+            request = TotalRecallApi.endGame(remainingCards);
+            
+            request.then(function (response) {
+                
+                var message;
+
+                if (response.success) {
+                    message = 'Your score: ' + $scope.score;
+                } else {
+                    message = null;
+                }
+
+                $rootScope.$broadcast('overlay:show', {
+                    title: response.message,
+                    text: message,
+                    cta: {
+                        text: 'Start again',
+                        event: 'game:new'
+                    }
+                });
+
+            });
+
+        }
 
         function makeGuess(card) {
 
