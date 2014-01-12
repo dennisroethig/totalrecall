@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('totalrecallApp').filter('points', function () {
+angular.module('totalrecallApp').filter('scoreAsString', function () {
     return function (number) {
 
         if (!number) { return; }
