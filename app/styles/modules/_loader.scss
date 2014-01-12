@@ -1,0 +1,66 @@
+/*
+ * CSS only loader/spinner
+ * - based on Lea Verou's example
+ * - http://lea.verou.me/2013/11/cleanest-css-spinner-ever/
+ */
+
+@keyframes spin {
+    to { transform: rotate(1turn); }
+}
+
+.loader {
+    position: relative;
+    width: 5em;
+    height: 5em;
+    margin: 0 auto;
+    font-size: 6px;
+    text-indent: 999em;
+    overflow: hidden;
+    animation: spin 1s infinite steps(8);
+}
+
+.loader:before,
+.loader:after,
+.loader__inner:before,
+.loader__inner:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 2.25em;
+    width: .5em;
+    height: 1.5em;
+    border-radius: .2em;
+    background: #eee;
+    box-shadow: 0 3.5em #eee;
+    transform-origin: 50% 2.5em;
+}
+
+.loader {
+
+    &:before {
+        background: #555;
+    }
+
+    &:after {
+        transform: rotate(-45deg);
+        background: #777;
+    }
+
+}
+
+.loader__inner {
+
+    &:before {
+        transform: rotate(-90deg);
+        background: #999;
+    }
+
+    &:after {
+        transform: rotate(-135deg);
+        background: #bbb;
+    }
+
+}
+
+
+

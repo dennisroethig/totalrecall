@@ -18,9 +18,11 @@ body {
 
 .game-container {
 
-    // padding: 1em;
     position: relative;
     z-index: 1;
+    max-width: 500px;
+    margin: 0 auto;
+    padding-bottom: 2em;
 
 }
 
@@ -29,6 +31,7 @@ body {
     color: #fff;
     max-width: 280px;
     margin: 1.5em auto 0 auto;
+    padding: 0 1em;
 
 }
 

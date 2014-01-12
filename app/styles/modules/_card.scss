@@ -47,7 +47,6 @@
     color: $CARD-FRONT-TEXT-COLOR;
     z-index: 2;
     background-color: $CARD-SIDE-FRONT-COLOR;
-    // background: repeating-radial-gradient(circle, #444, #444 1px, #000 1px, #000 10px);
 
 }
 
@@ -55,10 +54,6 @@
     color: $CARD-BACK-TEXT-COLOR;
     transform: rotateY(180deg);
     background-color: $CARD-SIDE-BACK-COLOR;
-    // background: repeating-radial-gradient(circle, red, red 5px, white 5px, white 30px);
-    // background: repeating-radial-gradient(circle, #444, #444 4px, #000 4px, #000 16px);
-
-
 }
 
 
@@ -73,6 +68,21 @@
     margin-left: -50%;
     width: 100%;
     text-align: center;
+}
+
+
+// LOADER WRAPPER
+.card__loader {
+    color: inherit;
+    font-size: 2em;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5em;
+    margin-left: -50%;
+    width: 100%;
+    text-align: center;
+    z-index: 111;
 }
 
 
