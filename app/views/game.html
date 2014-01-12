@@ -19,39 +19,41 @@
 
 <section class="cardboard">
 
-    <ul class="cardboard_inner">
+    <div class="cardboard_outer">
+        <ul class="cardboard_inner">
 
-        <li ng-repeat="card in cards" ng-click="checkCard(card)" class="card card--{{card.state}}" >
+            <li ng-repeat="card in cards" ng-click="checkCard(card)" class="card card--{{card.state}}" >
 
-            <div class="card__outer-frame card--{{card.state}}__outer-frame">
+                <div class="card__outer-frame card--{{card.state}}__outer-frame">
 
-                <div class="card__inner-frame card--{{card.state}}__inner-frame">
+                    <div class="card__inner-frame card--{{card.state}}__inner-frame">
 
-                    <div class="card__side card--{{card.state}}__side card__side--front">
+                        <div class="card__side card--{{card.state}}__side card__side--front">
 
-                        <div class="card__loader" ng-if="card.loading">
-                            <div class="loader">
-                                <div class="loader__inner"></div>
+                            <div class="card__loader" ng-if="card.loading">
+                                <div class="loader">
+                                    <div class="loader__inner"></div>
+                                </div>
                             </div>
+                            
+
+                            <i class="fa fa-question-circle {{card.icon}} card__icon card--{{card.state}}__icon" ng-if="!card.loading"></i>
+
+
                         </div>
-                        
 
-                        <i class="fa fa-question-circle {{card.icon}} card__icon card--{{card.state}}__icon" ng-if="!card.loading"></i>
+                        <div class="card__side card--{{card.state}}__side card__side--back">
+                            <i class="fa {{card.icon}} card__icon card--{{card.state}}__icon"></i>
+                        </div>
 
-
-                    </div>
-
-                    <div class="card__side card--{{card.state}}__side card__side--back">
-                        <i class="fa {{card.icon}} card__icon card--{{card.state}}__icon"></i>
                     </div>
 
                 </div>
 
-            </div>
+            </li>
 
-        </li>
-
-    </ul>
+        </ul>
+    </div>
 
 </section>
 

@@ -1,10 +1,13 @@
 .cardboard {
+	max-width: 500px;
+	margin: 0 auto;
+}
 
-    border: 8px solid $CARDBOARD-BORDER-COLOR;
+.cardboard_outer {
+	border: 8px solid $CARDBOARD-BORDER-COLOR;
     background: url("/images/totalrecall.jpg") no-repeat center center; 
     background-size: cover;
     margin: 0 0.8em;
-
 }
 
 .cardboard_inner {
