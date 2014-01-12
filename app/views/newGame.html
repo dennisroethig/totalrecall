@@ -4,11 +4,19 @@
 </section>
 
 <section class="user-details content_module">
-    <input type="text" name="input" ng-model="userName" required ng-trim="false" class="user-details__input" >
-    <br />
-    <input type="text" name="input" ng-model="userEmail" required ng-trim="false" class="user-details__input" >
-    <br />
-    <input type="button" value="Start Game" ng-click="startGame()" class="button button_expand user-details__button" />
+
+	<form name="newGameForm">
+		
+	    <input type="text" name="inputName" ng-model="userName" placeholder="Name" required ng-trim="false" class="user-details__input" >
+	    <span ng-if="submitted" class="user-details__warning" ng-show="newGameForm.inputName.$error.required">Name required!</span>
+
+	    <input type="email" name="inputEmail" ng-model="userEmail" placeholder="Email" required ng-trim="false" class="user-details__input" >
+	    <span ng-if="submitted" class="user-details__warning" ng-show="newGameForm.inputEmail.$error.required">Email required!</span>
+	    <span ng-if="submitted" class="user-details__warning" ng-show="newGameForm.inputEmail.$error.email">Email not valid!</span>
+
+	    <input type="button" value="Start Game" ng-click="startGame()" class="button button_expand user-details__button" />
+
+    </form>
 </section>
 
 <section class="content_module">

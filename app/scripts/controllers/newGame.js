@@ -12,8 +12,8 @@ angular.module('totalrecallApp')
     .controller('NewGameCtrl', function ($scope, $rootScope, $location, TotalRecallApi, GameInfo, Highscores) {
 
         // SCOPE VARIABLES
-        $scope.userName = 'dennis';
-        $scope.userEmail = 'roethig.dennis@gmail.com';
+        $scope.userName = '';
+        $scope.userEmail = '';
 
         // Set initial Highscores
         $scope.highscores = Highscores.get();
@@ -25,6 +25,9 @@ angular.module('totalrecallApp')
             var name = $scope.userName,
                 email = $scope.userEmail,
                 request;
+
+            // Make errors vissible when user tried to submit invalid data
+            $scope.submitted = true;
 
             // name && email is filled out, request new game
             if (name && email) {

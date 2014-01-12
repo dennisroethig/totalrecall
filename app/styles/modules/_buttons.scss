@@ -11,6 +11,7 @@
 	color: $BUTTON-FONT-COLOR;
 	text-transform: capitalize;
 	appearance: none;
+	-webkit-appearance: none;
 	outline: none;
 	transition: 0.3s;
 	cursor: pointer;

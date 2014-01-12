@@ -4,11 +4,14 @@
     box-sizing: border-box; 
 }
 
+html, body {
+    background-color: $BODY-BACKGROUND-COLOR;
+}
+
 // Set site-wide default styles
 body {
     font-size: 16px;
     font-family: $BODY-FONT-FAMILY;
-    background-color: $BODY-BACKGROUND-COLOR;
     color: $BODY-FONT-COLOR;
 }
 
@@ -55,7 +58,8 @@ h6 {
 }
 
 // Default input styles
-input[type="text"] {
+input[type="text"],
+input[type="email"] {
     font-size: 1.1em;
     font-family: inherit;
     background: $INPUT-BACKGROUND-COLOR;

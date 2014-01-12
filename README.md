@@ -43,6 +43,9 @@ $ grunt build
 *	Angular is used for the application itself
 *	The application speaks to the provided API ([totalrecall.99cluster.com](http://totalrecall.99cluster.com))
 *	Highscores are saved in localStorage
+*	[Font Awesome](http://fontawesome.io/) used for memory images
+*	[Google fonts](http://www.google.com/fonts/specimen/VT323) used for body font
+*	Theme based on Total Recall movie (1990)
 
 #### Possible next steps:
 *	Resolving CORS/Safari issue
