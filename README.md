@@ -62,7 +62,7 @@ $ grunt build
 
 
 ### Tested browsers and devices:
-Due to the infrastructure of this application and the used API, Internet Explorer will be only support in version 10. Even this version has some known style issues, which are partly fixedand partly open.
+Due to the infrastructure of this application and the used API, Internet Explorer will be only supported in version 10. Even this version has some known style issues, which are partly fixed and partly still open.
 
 #### Browsers
 *	Chrome (latest)

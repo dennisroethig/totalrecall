@@ -14,7 +14,7 @@
 	    <span ng-if="submitted" class="user-details__warning" ng-show="newGameForm.inputEmail.$error.required">Email required!</span>
 	    <span ng-if="submitted" class="user-details__warning" ng-show="newGameForm.inputEmail.$error.email">Email not valid!</span>
 
-	    <input type="button" value="Start Game" ng-click="startGame()" class="button button_expand user-details__button" />
+	    <input type="submit" value="Start Game" ng-click="startGame()" class="button button_expand user-details__button" />
 
     </form>
 </section>
