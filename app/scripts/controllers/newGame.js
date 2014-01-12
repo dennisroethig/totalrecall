@@ -21,13 +21,7 @@ angular.module('totalrecallApp')
                 request;
 
             $rootScope.$broadcast('overlay:show', {
-                title: 'Loading...',
-                // text: 'Overlay text text text text text text',
-                // cta: {
-                //     text: 'button text',
-                //     className: 'primary',
-                //     event: 'overlay:hide'
-                // }
+                title: 'Loading...'
             });
 
             if (name && email) {

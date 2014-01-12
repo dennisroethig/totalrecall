@@ -14,7 +14,7 @@
 
 angular.module('totalrecallApp')
 
-    .controller('OverlayCtrl', function ($scope, $rootScope) {
+    .controller('OverlayCtrl', function ($scope, $rootScope, $location) {
 
         $scope.$on('overlay:show', function(event, content) {
 
@@ -25,6 +25,13 @@ angular.module('totalrecallApp')
         $scope.$on('overlay:hide', function(event, content) {
 
             hideOverlay();
+
+        });
+
+        $scope.$on('game:new', function(event, content) {
+
+            hideOverlay();
+            $location.path('/new');
 
         });
 

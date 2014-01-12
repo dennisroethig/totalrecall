@@ -2,7 +2,7 @@
 
 angular.module('totalrecallApp')
 
-    .controller('GameCtrl', function ($scope, $location, $http, TotalRecallApi, Icons, GameInfo, Timer) {
+    .controller('GameCtrl', function ($scope, $rootScope, $location, $http, TotalRecallApi, Icons, GameInfo, Timer) {
 
         var gameUrl = 'http://totalrecall.99cluster.com',
             currentStep = 0,
@@ -21,7 +21,7 @@ angular.module('totalrecallApp')
         $scope.timerProgress = 0;
         $scope.guessCount = 0;
         $scope.cards = $scope.gameData.cards;
-        $scope.pointsTotal = 10000;
+        $scope.score = 10000;
 
         gameId = $scope.gameData.gameId;
 
@@ -31,15 +31,15 @@ angular.module('totalrecallApp')
         $scope.$watch('guessCount', function () {
 
             if ($scope.guessCount > 0) {
-                $scope.pointsTotal = $scope.pointsTotal - 100;
+                $scope.score = $scope.score - 100;
             }
 
         });
 
         $scope.$watch('solved' , function () {
 
-            var remainingCards,
-                postData;
+            var postData = '',
+                remainingCards;
 
             remainingCards = $scope.cards.filter(function( obj ) {
                 return obj.resolved === false;
@@ -47,31 +47,30 @@ angular.module('totalrecallApp')
 
             if (remainingCards.length === 2) {
 
-                postData = 'x1=' + remainingCards[0].x;
-                postData += '&y1=' + remainingCards[0].y;
-                postData += '&x2=' + remainingCards[1].x;
-                postData += '&y2=' + remainingCards[1].y;
+                remainingCards.forEach(function (card, key) {
+                    card.state = 'solved';
+                    card.resolved = true;
+                    postData += 'x' + (key+1) + '=' + card.x + '&';
+                    postData += 'y' + (key+1) + '=' + card.y + '&';
+                });
 
                 $http({
                     method: 'POST',
                     url: gameUrl + '/games/' + gameId + '/end',
-                    data: postData,
+                    data: postData.slice(0, - 1),
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }).success(function(response, status) {
 
-                    console.log(response, status);
-
-                    // TODO: SHOW ALL CARDS
-
-                    // TODO: SHOW WIN MESSAGE
-
-                }).error(function(response, status) {
-
-                    console.log(response, status);
-
-                    // TODO: SHOW CONNECTION ERROR
+                    $rootScope.$broadcast('overlay:show', {
+                        title: response.message,
+                        text: 'Your score: ' + $scope.score,
+                        cta: {
+                            text: 'Start again',
+                            event: 'game:new'
+                        }
+                    });
 
                 });
 
@@ -81,7 +80,11 @@ angular.module('totalrecallApp')
 
         $scope.checkCard = function (card) {
 
-            if (!card.resolved) {
+            console.log('currentStep', currentStep);
+
+            if (!card.resolved && !card.flipped) {
+
+                card.flipped = true;
 
                 if (currentStep < 2) {
 
@@ -90,8 +93,12 @@ angular.module('totalrecallApp')
 
                 } else if (currentCards.length) {
 
-                    currentCards[0].state = '';
-                    currentCards[1].state = '';
+
+                    for (var i = 0; i < currentCards.length; i++) {
+                        currentCards[i].state = '';
+                        currentCards[i].flipped = false;
+                    }
+
                     currentCards = [];
                     currentStep = 1;
                     makeGuess(card);
