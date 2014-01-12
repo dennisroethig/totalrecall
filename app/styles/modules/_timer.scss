@@ -1,11 +1,10 @@
 .timer {
-	height: 5px;
+	height: $TIMER-HEIGHT;
 	width: 100%;
 }
 
+// Progress bar - will be filled by inline-style adjusted by JavaScript
 .timer__progress {
-	background-color: $LIGHTNING-BLUE;
+	background-color: $TIMER-COLOR;
 	height: 100%;
-	width: 30%;
-	// transition: 2.5s;
 }
