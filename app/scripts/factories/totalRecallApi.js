@@ -17,7 +17,12 @@ angular.module('totalrecallApp')
 
                     method: 'POST',
 
-                    url: domain + '/games/',
+                    // TODO: Check for alternatives
+                    // Thanks to Safari blocking CORS redirects, we need to use a CORS proxy to get that submit going...
+
+                    // url: domain + '/games/',
+
+                    url: 'http://cors-anywhere.herokuapp.com/totalrecall.99cluster.com/games/',
 
                     data: 'name=' + name + '&email=' + email,
 
