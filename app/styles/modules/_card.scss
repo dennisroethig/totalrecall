@@ -87,9 +87,6 @@
 }
 
 
-
-
-
 // Special styles for matched card
 .card--matched {
     background-color: transparent;
@@ -110,6 +107,7 @@
 
 
 // IE9 & IE10 specific styles needed
+// backface-visibility causes known issues
 @media screen and (min-width:0\0) {
  
     .card--flipped__inner-frame,

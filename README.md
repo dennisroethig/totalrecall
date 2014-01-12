@@ -58,16 +58,18 @@ $ grunt build
 *	Removing Ruby (Compass) dependency (not really needed)
 *	Adding frontend tests
 *	Independet backend to allow multiplayer
+*	Supporting older Internet Explorer versions
 
 
 ### Tested browsers and devices:
+Due to the infrastructure of this application and the used API, Internet Explorer will be only support in version 10. Even this version has some known style issues, which are partly fixedand partly open.
 
 #### Browsers
 *	Chrome (latest)
 *	Firefox (latest)
 *	Opera Next (latest)
 *	Internet Explorer 9 (CORS not working)
-*	Internet Explorer 10 (CSS issues known)
+*	Internet Explorer 10 (CSS known issues, but working)
 
 #### Devices
 *	iPhone 4 (iOS 7)
