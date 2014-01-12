@@ -35,7 +35,7 @@
         <section class="overlay__content content_module">
             <h1 ng-if="title" class="overlay__title">{{title}}</h1>
             <h2 ng-if="text" class="overlay__text">{{text}}</h2>
-            <img ng-if="image" src="{{image}}" alt="Total Recall" class="overlay__image" />
+            <img ng-if="image" ng-src="{{image}}" alt="Total Recall" class="overlay__image" />
             <input ng-if="cta" ng-click="ctaClicked(cta.event)" value="{{cta.text}}" class="button overlay__button" />
         </section>
 
@@ -59,6 +59,7 @@
     <script src="scripts/factories/totalRecallApi.js"></script>
     <script src="scripts/factories/icons.js"></script>
     <script src="scripts/factories/gameInfo.js"></script>
+    <script src="scripts/factories/highscores.js"></script>
     <script src="scripts/factories/timer.js"></script>
     <script src="scripts/filters/scoreAsString.js"></script>
     <script src="scripts/controllers/game.js"></script>

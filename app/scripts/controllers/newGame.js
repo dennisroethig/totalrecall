@@ -9,12 +9,14 @@
 
 angular.module('totalrecallApp')
 
-    .controller('NewGameCtrl', function ($scope, $rootScope, $location, TotalRecallApi, GameInfo) {
+    .controller('NewGameCtrl', function ($scope, $rootScope, $location, TotalRecallApi, GameInfo, Highscores) {
 
         // SCOPE VARIABLES
         $scope.userName = 'dennis';
         $scope.userEmail = 'roethig.dennis@gmail.com';
 
+        // Set initial Highscores
+        $scope.highscores = Highscores.get();
 
         // LISTEN FOR 'NEW GAME' CLICK
         $scope.startGame = function () {
@@ -39,10 +41,7 @@ angular.module('totalrecallApp')
                 request.then(function (response) {
 
                     // Assign game data to provider object
-                    GameInfo.data = {
-                        gameId: response.gameId,
-                        cards: response.cards
-                    };
+                    GameInfo.data = response;
 
                     // Redirect to play page
                     $location.path('/play');

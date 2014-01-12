@@ -10,7 +10,7 @@
 
 angular.module('totalrecallApp')
 
-    .controller('GameCtrl', function ($scope, $rootScope, $location, $http, TotalRecallApi, Icons, GameInfo, Timer) {
+    .controller('GameCtrl', function ($scope, $rootScope, $location, $http, TotalRecallApi, Icons, GameInfo, Timer, Highscores) {
 
 
         // LOCAL VARIABLES
@@ -25,6 +25,8 @@ angular.module('totalrecallApp')
 
         // Get game info from GameInfo Provider
         $scope.gameData = GameInfo.data;
+
+        console.log('$scope.gameData', $scope.gameData);
 
         // Set initial level to 1
         $scope.level = 1;
@@ -149,11 +151,19 @@ angular.module('totalrecallApp')
                 // Stop timer
                 Timer.stop();
 
-                // Create Win/Lost message from server response
+                // Create Win/Lost message from server response and set Highscore
                 if (response.success) {
+
                     message = 'Your score: ' + $scope.score;
                     imageSrc = 'images/total_recall.jpg';
+
+                    Highscores.set({
+                        name: $scope.gameData.name,
+                        score: $scope.score
+                    });
+
                 } else {
+
                     message = null;
                     imageSrc = 'images/total_recall_2012.jpg';
 

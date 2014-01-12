@@ -11,15 +11,27 @@
     <input type="button" value="Start Game" ng-click="startGame()" class="button button_expand user-details__button" />
 </section>
 
-<section class="rules content_module">
+<section class="content_module">
 	
 	<h2>Rules</h2>
 
-	<ul class="rules__list">
+	<ul class="content_list">
 		<li>You start with 10000 points</li>
 		<li>Find a pair and go to the next level</li>
 		<li>Higher Level means less time</li>
 		<li>If your time is gone you loose</li>
+	</ul>
+
+</section>
+
+<section class="content_module" ng-if="highscores">
+	
+	<h2>Highscores</h2>
+
+	<ul class="content_list">
+		<li ng-repeat="score in highscores | orderBy:'-score' | limitTo:5" >
+			{{score.score | scoreAsString}} - {{score.name}}
+		</li>
 	</ul>
 
 </section>

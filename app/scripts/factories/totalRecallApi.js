@@ -72,6 +72,8 @@ angular.module('totalrecallApp')
 
                     // Provide promise with data: gameId & cards array
                     deferred.resolve({
+                        name: name,
+                        email: email,
                         gameId: gameId,
                         cards: cards
                     });
