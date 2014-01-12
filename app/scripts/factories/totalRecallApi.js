@@ -31,9 +31,6 @@ angular.module('totalrecallApp')
 
                     method: 'POST',
 
-                    // TODO: Check for alternatives
-                    // Thanks to Safari blocking CORS redirects, we need to use a CORS proxy to get that submit going...
-
                     // url: domain + '/games/',
 
                     url: 'http://cors-anywhere.herokuapp.com/totalrecall.99cluster.com/games/',
@@ -103,7 +100,6 @@ angular.module('totalrecallApp')
 
                 });
 
-
                 return deferred.promise;
 
             },
@@ -118,7 +114,6 @@ angular.module('totalrecallApp')
 
                     url: domain + '/games/' + gameId + '/cards/' + x + ',' + y,
 
-
                 }).success(function(response) {
 
                     deferred.resolve(response);
@@ -130,6 +125,7 @@ angular.module('totalrecallApp')
             }
 
         };
+        
     });
 
 
