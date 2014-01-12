@@ -26,8 +26,6 @@ angular.module('totalrecallApp')
         // Get game info from GameInfo Provider
         $scope.gameData = GameInfo.data;
 
-        console.log('$scope.gameData', $scope.gameData);
-
         // Set initial level to 1
         $scope.level = 1;
 
