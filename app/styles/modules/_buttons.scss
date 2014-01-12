@@ -8,6 +8,8 @@
 	font-size: 1em;
 	text-align: center;
 	text-transform: capitalize;
+	appearance: none;
+	-webkit-appearance: none;
 
 	&:hover {
 		@include box-shadow(#fff 0 0 5px);
