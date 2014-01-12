@@ -12,8 +12,8 @@ angular.module('totalrecallApp')
     .controller('NewGameCtrl', function ($scope, $rootScope, $location, TotalRecallApi, GameInfo, Highscores) {
 
         // SCOPE VARIABLES
-        $scope.userName = '';
-        $scope.userEmail = '';
+        $scope.userName = 'dennis';
+        $scope.userEmail = 'dennis@test.com';
 
         // Set initial Highscores
         $scope.highscores = Highscores.get();

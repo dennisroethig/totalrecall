@@ -46,7 +46,6 @@
     color: $CARD-FRONT-TEXT-COLOR;
     z-index: 2;
     background-color: $CARD-SIDE-FRONT-COLOR;
-
 }
 
 // Back side hidden before flipping
@@ -88,6 +87,9 @@
 }
 
 
+
+
+
 // Special styles for matched card
 .card--matched {
     background-color: transparent;
@@ -104,4 +106,29 @@
 }
 .card--matched__icon {
     color: $CARD-MATCHED-TEXT-COLOR;
+}
+
+
+// IE9 & IE10 specific styles needed
+@media screen and (min-width:0\0) {
+ 
+    .card--flipped__inner-frame,
+    .card--matched__inner-frame {
+        transform: none;
+        -ms-transform: none;
+    }   
+
+    .card--flipped__side,
+    .card--matched__side {
+        
+        &.card__side--front {
+            display:none;
+        }
+
+        &.card__side--back {
+            transform: none;
+            -ms-transform: none;
+        }
+    }
+
 }

@@ -4,17 +4,23 @@
 Make sure you have these installed:
 
 *	[npm](https://npmjs.org/)
-*	[bower](http://bower.io/)
+*	[Bower](http://bower.io/)
 *	[Compass](http://compass-style.org/)
 
+
+##### Install Ruby Gems from /Gemfile
+```
+$ bundle install --path=gems
+```
 
 ##### Install NPM components from /package.json
 ```
 $ npm install
 ```
-##### Install Ruby Gems from /Gemfile
+
+##### Install Bower components from /bower.json
 ```
-$ bundle install --path=gems
+$ bower install
 ```
 
 ### Development:
@@ -49,6 +55,7 @@ $ grunt build
 
 #### Possible next steps:
 *	Resolving CORS/Safari issue
+*	Removing Ruby (Compass) dependency (not really needed)
 *	Adding frontend tests
 *	Independet backend to allow multiplayer
 
@@ -59,9 +66,8 @@ $ grunt build
 *	Chrome (latest)
 *	Firefox (latest)
 *	Opera Next (latest)
-*	Internet Explorer 9
-*	Internet Explorer 10
-*	Internet Explorer 11
+*	Internet Explorer 9 (CORS not working)
+*	Internet Explorer 10 (CSS issues known)
 
 #### Devices
 *	iPhone 4 (iOS 7)
