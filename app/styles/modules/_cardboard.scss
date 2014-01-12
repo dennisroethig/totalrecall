@@ -13,7 +13,8 @@
 .cardboard_inner {
 
     position: relative;
-    width: 100.5%;
+    width: 100.0%;
+    // width: 100.5%;
 
     @include box-shadow(#fff 0 0 20px);
 
