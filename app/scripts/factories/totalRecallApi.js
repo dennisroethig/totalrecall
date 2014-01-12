@@ -56,7 +56,7 @@ angular.module('totalrecallApp')
                             cards.push({
                                 x: j,
                                 y: i,
-                                resolved: false,
+                                matched: false,
                                 icon: ''
                             });
 

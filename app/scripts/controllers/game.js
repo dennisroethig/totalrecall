@@ -1,113 +1,161 @@
 'use strict';
 
+/*
+ *  Game Controller
+ *  - Controls the game page
+ *  - Recieves data from 'New Game' page (Game Data Provider)
+ *  - Starts new game, when game data is avilable
+ *  - See detailed documentation inside controller
+*/
+
 angular.module('totalrecallApp')
 
     .controller('GameCtrl', function ($scope, $rootScope, $location, $http, TotalRecallApi, Icons, GameInfo, Timer) {
 
-        var gameUrl = 'http://totalrecall.99cluster.com',
-            currentStep = 0,
-            currentCards = [],
-            gameId;
 
+        // LOCAL VARIABLES
+        var cards = {
+            loading: false,
+            visible: [],
+            remaining: []
+        };
+
+
+        // SCOPE VARIABLES
+
+        // Get game info from GameInfo Provider
         $scope.gameData = GameInfo.data;
 
-        if (!$scope.gameData) {
-            $location.path('/new');
-            return;
-        }
-        
+        // Set initial level to 1
         $scope.level = 1;
-        $scope.solved = 0;
-        $scope.timerProgress = 0;
-        $scope.guessCount = 0;
-        $scope.cards = $scope.gameData.cards;
+
+        // Set inital Score to 10000
         $scope.score = 10000;
 
-        gameId = $scope.gameData.gameId;
+        // Set matched counter to 0
+        $scope.matched = 0;
 
-        Timer.start($scope);
+        // Set guesses counter to 0
+        $scope.guesses = 0;
+
+        // Set initial cards (scope) to empty
+        $scope.cards = [];
 
 
+        // START GAME
+        startGame();
+
+
+        // LISTEN TO 'GAME OVER' EVENT IF TIME RUNS OUT
         $scope.$on('game:over', function(event) {
 
             endGame();
 
         });
 
-        $scope.$watch('guessCount', function () {
 
-            if ($scope.guessCount > 0) {
+        // WATCH GUESS COUNT TO UPDATE SCORE
+        $scope.$watch('guesses', function () {
+
+            // Decrease score if at least on guess was made
+            if ($scope.guesses > 0) {
                 $scope.score = $scope.score - 100;
             }
 
         });
 
-        $scope.$watch('solved' , function () {
+        // WATCH MATCHED COUNT TO CHECK IF ALL CARDS ARE MATCHED
+        $scope.$watch('matched' , function () {
 
-            var remainingCards = $scope.cards.filter(function( obj ) {
-                return obj.resolved === false;
+            // Get remaining (not matched) cards
+            cards.remaining = $scope.cards.filter(function(card) {
+                return !card.matched;
             });
 
-            if (remainingCards.length === 2) {
-
-                endGame(remainingCards);
-
+            // If only two card remain => game over
+            if (cards.remaining.length === 2) {
+                endGame();
             }
 
         });
 
+
+        // LISTEN TO CARD-CLICK
         $scope.checkCard = function (card) {
 
-            if (!card.resolved && !card.flipped) {
+            // If there is no pending request, allow card to be checked
+            if (!cards.loading) {
 
-                card.flipped = true;
+                // If two unmatched cards are already visible, hide them 
+                if (cards.visible.length === 2) {
 
-                if (currentStep < 2) {
+                    // Reset visible cards
+                    cards.visible.forEach(function (card, index) {
+                        card.state = '';
+                    });
 
-                    currentStep++;
-                    makeGuess(card);
-
-                } else if (currentCards.length) {
-
-
-                    for (var i = 0; i < currentCards.length; i++) {
-                        currentCards[i].state = '';
-                        currentCards[i].flipped = false;
-                    }
-
-                    currentCards = [];
-                    currentStep = 1;
-                    makeGuess(card);
-
-                } else {
-
-                    currentStep = 1;
-                    makeGuess(card);
+                    // Clear visible cards array
+                    cards.visible.length = 0;
 
                 }
+
+                // Set cards.loading to prevent further request while guessing
+                cards.loading = true;
+
+                // Push card to visible array
+                cards.visible.push(card);
+
+                // Make guess (to API)
+                makeGuess(card);
 
             }
 
         };
 
-        function endGame(remainingCards) {
 
-            var request;
+        // START GAME
+        function startGame() {
 
-            remainingCards = remainingCards || $scope.cards;
+            // If Game data is available start game, if not, redirect to 'New Game' page
+            if ($scope.gameData) {
+                
+                // Start timer
+                Timer.start($scope);
 
-            request = TotalRecallApi.endGame(remainingCards);
+                // Fill cards (scope) with available cards (displayed in template)
+                $scope.cards = $scope.gameData.cards;
+
+            } else {
+
+                $location.path('/new');
+                return;
+
+            }
+
+        }
+
+        // END GAME
+        function endGame() {
+
+            // API call
+            var request = TotalRecallApi.endGame(cards.remaining);
             
+            // Promise
             request.then(function (response) {
                 
                 var message;
 
+                // Stop timer
+                Timer.stop();
+
+                // Create Win/Lost message from server response
                 if (response.success) {
                     message = 'Your score: ' + $scope.score;
                 } else {
                     message = null;
                 }
 
+                // Trigger Overlay event to Overlay Controller to show 'Game Over' message
                 $rootScope.$broadcast('overlay:show', {
                     title: response.message,
                     text: message,
@@ -121,38 +169,67 @@ angular.module('totalrecallApp')
 
         }
 
+        // MAKE GUESS
         function makeGuess(card) {
 
-            card.loading = true;
-
+            // API call
             var request = TotalRecallApi.guess(card.x, card.y);
 
+            // Set card to 'loading'
+            card.loading = true;
+
+            // Promise
             request.then(function (response) {
 
+                // Set state to 'flipped' (used in templates to create flipped-class)
                 card.state = 'flipped';
+
+                // Set value of card (a, b, c, ...)
                 card.value = response;
+
+                // Set icon-class using Icons provider
                 card.icon = Icons[card.value];
+
+                // Set card to not 'loading'
                 card.loading = false;
-                currentCards.push(card);
 
-                if (currentCards[1] && currentCards[0].value === currentCards[1].value) {
-                    $scope.solved++;
-                    currentCards[0].resolved = true;
-                    currentCards[1].resolved = true;
-                    currentCards[0].state = 'solved';
-                    currentCards[1].state = 'solved';
-                    currentCards = [];
+                // If two cards are visible compare their values
+                if (cards.visible.length === 2) {
 
-                    $scope.level++;
-                    Timer.reset($scope);
-
-                } else if (currentCards[1] && currentCards[0].value !== currentCards[1].value) {
-
-                    $scope.guessCount++;
+                    // If values match go to next level and mark cards as solved, if not increase guess count
+                    if (cards.visible[0].value === cards.visible[1].value) {
+                        nextLevel();
+                    } else {
+                        $scope.guesses++;
+                    }
 
                 }
 
+                // Set cards.loading to false to allow the next card click
+                cards.loading = false;
+
             });
+
+        }
+
+        // GO TO NEXT LEVEL
+        function nextLevel() {
+
+            // Update scope (solved count && Level)
+            $scope.matched++;
+            $scope.level++;
+
+            // Set matched cards to solved
+            cards.visible.forEach(function (card, index) {
+                card.state = 'solved';
+                card.matched = true;
+            });
+
+            // Clear visible cards array
+            cards.visible.length = 0;
+
+            // Reset timer for next Level
+            Timer.reset($scope);
 
         }
 

@@ -16,31 +16,44 @@ angular.module('totalrecallApp')
 
     .controller('OverlayCtrl', function ($scope, $rootScope, $location) {
 
+        // LISTEN TO 'OVERLAY:SHOW' EVENT
         $scope.$on('overlay:show', function(event, content) {
 
             showOverlay(content);
 
         });
 
+        // LISTEN TO 'OVERLAY:HIDE' EVENT
         $scope.$on('overlay:hide', function(event, content) {
 
+            // Hide overlay
             hideOverlay();
 
         });
 
+
+        // LISTEN TO 'GAME:NEW' EVENT
         $scope.$on('game:new', function(event, content) {
 
+            // Hide overlay
             hideOverlay();
+
+            // Redirect to 'New Game' page
             $location.path('/new');
 
         });
 
+
+        // LISTEN TO CALL-TO-ACTION CLICK FROM OVERLAY
         $scope.ctaClicked = function (broadcastEvent) {
 
+            // Trigger broadcast event assigned to overlay button
             $rootScope.$broadcast(broadcastEvent, {});
 
         };
 
+
+        // SHOW OVERLAY
         function showOverlay(content) {
             $scope.title = content.title;
             $scope.text = content.text;
@@ -48,6 +61,7 @@ angular.module('totalrecallApp')
             $scope.className = 'overlay--visible';
         }
 
+        // HIDE OVERLAY
         function hideOverlay() {
             $scope.title = null;
             $scope.text = null;

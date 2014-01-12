@@ -13,17 +13,19 @@ angular.module('totalrecallApp')
     .factory('Timer', function ($rootScope) {
         
         var interval = 1000,
-            timer;
+            timerInstance;
 
         return {
 
             start: function (scope) {
 
+                var timer = this;
+
                 // reset progress on start
                 scope.timerProgress = 0;
 
-                // create new timer
-                timer = setInterval(function () {
+                // create new timer instance
+                timerInstance = setInterval(function () {
                     
                     // if progress is not complete (100%), increase progress
                     if (scope.timerProgress < 100) {
@@ -39,7 +41,8 @@ angular.module('totalrecallApp')
                     // if progress is complete, end game
                     else {
 
-                        clearInterval(timer);
+                        timer.stop();
+
                         $rootScope.$broadcast('game:over', {});
 
                     }
@@ -53,11 +56,18 @@ angular.module('totalrecallApp')
 
             reset: function (scope) {
 
-                // clear current timer
-                clearInterval(timer);
+                // clear current timer instance
+                clearInterval(timerInstance);
 
                 // start a new timer
                 this.start(scope);
+
+            },
+
+            stop: function (scope) {
+
+                // clear current timer instance
+                clearInterval(timerInstance);
 
             }
 
