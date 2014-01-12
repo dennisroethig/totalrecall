@@ -8,10 +8,7 @@ Make sure you have these installed:
 *	[Compass](http://compass-style.org/)
 
 
-##### Install Compass
-```
-$ gem install compass
-```
+### Install project dependencies:
 
 ##### Install NPM components from /package.json
 ```
