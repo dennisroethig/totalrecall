@@ -8,9 +8,9 @@ Make sure you have these installed:
 *	[Compass](http://compass-style.org/)
 
 
-##### Install Ruby Gems from /Gemfile
+##### Install Compass
 ```
-$ bundle install --path=gems
+$ gem install compass
 ```
 
 ##### Install NPM components from /package.json
