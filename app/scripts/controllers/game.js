@@ -110,6 +110,8 @@ angular.module('totalrecallApp')
 
         function makeGuess(card) {
 
+            card.loading = true;
+
             var request = TotalRecallApi.guess(card.x, card.y);
 
             request.then(function (response) {
@@ -117,7 +119,7 @@ angular.module('totalrecallApp')
                 card.state = 'flipped';
                 card.value = response;
                 card.icon = Icons[card.value];
-
+                card.loading = false;
                 currentCards.push(card);
 
                 if (currentCards[1] && currentCards[0].value === currentCards[1].value) {
