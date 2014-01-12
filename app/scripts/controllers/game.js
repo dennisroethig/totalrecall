@@ -143,7 +143,8 @@ angular.module('totalrecallApp')
             // Promise
             request.then(function (response) {
                 
-                var message;
+                var message,
+                    imageSrc;
 
                 // Stop timer
                 Timer.stop();
@@ -151,14 +152,18 @@ angular.module('totalrecallApp')
                 // Create Win/Lost message from server response
                 if (response.success) {
                     message = 'Your score: ' + $scope.score;
+                    imageSrc = 'images/total_recall.jpg';
                 } else {
                     message = null;
+                    imageSrc = 'images/total_recall_2012.jpg';
+
                 }
 
                 // Trigger Overlay event to Overlay Controller to show 'Game Over' message
                 $rootScope.$broadcast('overlay:show', {
                     title: response.message,
                     text: message,
+                    image: imageSrc,
                     cta: {
                         text: 'Start again',
                         event: 'game:new'

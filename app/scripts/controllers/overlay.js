@@ -57,6 +57,7 @@ angular.module('totalrecallApp')
         function showOverlay(content) {
             $scope.title = content.title;
             $scope.text = content.text;
+            $scope.image = content.image;
             $scope.cta = content.cta;
             $scope.className = 'overlay--visible';
         }
@@ -65,6 +66,7 @@ angular.module('totalrecallApp')
         function hideOverlay() {
             $scope.title = null;
             $scope.text = null;
+            $scope.image = null;
             $scope.cta = null;
             $scope.className = '';
         }

@@ -35,6 +35,7 @@
         <section class="overlay__content content_module">
             <h1 ng-if="title" class="overlay__title">{{title}}</h1>
             <h2 ng-if="text" class="overlay__text">{{text}}</h2>
+            <img ng-if="image" src="{{image}}" alt="Total Recall" class="overlay__image" />
             <input ng-if="cta" ng-click="ctaClicked(cta.event)" value="{{cta.text}}" class="button overlay__button" />
         </section>
 
