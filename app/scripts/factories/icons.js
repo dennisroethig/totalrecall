@@ -1,5 +1,10 @@
 'use strict';
 
+/*
+ *  Icons Provider
+ *  - Provide mapping object for server-data <=> font-awesome icons
+*/
+
 angular.module('totalrecallApp')
     
     .factory('Icons', function () {

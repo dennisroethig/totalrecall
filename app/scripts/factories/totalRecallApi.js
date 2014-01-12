@@ -18,21 +18,24 @@ angular.module('totalrecallApp')
 
     .factory('TotalRecallApi', function ($http, $q) {
         
+        // Set API domain
         var domain = 'http://totalrecall.99cluster.com',
             gameId;
 
         return {
 
+            // START GAME REQUEST
             startGame: function (name, email) {
 
                 var deferred = $q.defer();
 
+                // POST request with name & email as data
                 $http({
 
                     method: 'POST',
 
+                    // CORS workaround
                     // url: domain + '/games/',
-
                     url: 'http://cors-anywhere.herokuapp.com/totalrecall.99cluster.com/games/',
 
                     data: 'name=' + name + '&email=' + email,
@@ -43,29 +46,31 @@ angular.module('totalrecallApp')
 
                 })
 
+                // Success callback
                 .success(function(response) {
 
                     var cards = [],
                         width = response.width,
                         height = response.height;
 
-                    for (var i = 0; i < height; i++) {
-
-                        for (var j = 0; j < width; j++) {
+                    // Create card model from response and push to array
+                    for (var y = 0; y < height; y++) {
+                        for (var x = 0; x < width; x++) {
 
                             cards.push({
-                                x: j,
-                                y: i,
+                                x: x,
+                                y: y,
                                 matched: false,
                                 icon: ''
                             });
 
                         }
-
                     }
 
+                    // Share gameId across different requests
                     gameId = response.id;
 
+                    // Provide promise with data: gameId & cards array
                     deferred.resolve({
                         gameId: gameId,
                         cards: cards
@@ -73,20 +78,24 @@ angular.module('totalrecallApp')
 
                 });
 
+                // Return promise to calling function
                 return deferred.promise;
 
             },
 
+            // END GAME REQUEST
             endGame: function (remainingCards) {
 
                 var deferred = $q.defer(),
                     postData = '';
 
+                // Provide request data as string
                 remainingCards.forEach(function (card, key) {
                     postData += 'x' + (key+1) + '=' + card.x + '&';
                     postData += 'y' + (key+1) + '=' + card.y + '&';
                 });
 
+                // POST request using remaining cards coordinates
                 $http({
                     method: 'POST',
                     url: domain + '/games/' + gameId + '/end',
@@ -94,20 +103,27 @@ angular.module('totalrecallApp')
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
-                }).success(function(response) {
+                })
 
+                // Success callback
+                .success(function(response) {
+
+                    // Provide promise with data
                     deferred.resolve(response);
 
                 });
 
+                // Return promise to calling function
                 return deferred.promise;
 
             },
 
+            // MAKE GUESS REQUEST
             guess: function (x, y) {
 
                 var deferred = $q.defer();
 
+                // GET request for a single caard using card coordinates
                 $http({
 
                     method: 'GET',
@@ -116,10 +132,12 @@ angular.module('totalrecallApp')
 
                 }).success(function(response) {
 
+                    // Provide promise with data
                     deferred.resolve(response);
 
                 });
 
+                // Return promise to calling function
                 return deferred.promise;
 
             }

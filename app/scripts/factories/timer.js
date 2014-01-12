@@ -30,8 +30,10 @@ angular.module('totalrecallApp')
                     // if progress is not complete (100%), increase progress
                     if (scope.timerProgress < 100) {
 
+                        // Set timer speed depeding of game level
                         scope.timerProgress += scope.level/2;
 
+                        // Set timer bar to 100% if progress reaches the limit
                         if (scope.timerProgress > 100) {
                             scope.timerProgress = 100;
                         }
@@ -43,6 +45,7 @@ angular.module('totalrecallApp')
 
                         timer.stop();
 
+                        // Trigger 'game:over' event
                         $rootScope.$broadcast('game:over', {});
 
                     }

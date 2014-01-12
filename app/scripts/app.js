@@ -1,5 +1,11 @@
 'use strict';
 
+/*
+ *  Total Recall Application
+ *  - Create application
+ *  - Router configuration
+*/
+
 angular.module('totalrecallApp', [
     'ngResource',
     'ngRoute'
