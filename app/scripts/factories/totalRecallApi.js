@@ -1,5 +1,19 @@
 'use strict';
 
+/*  
+ *  Total Recall API
+ *  - Provides controller with API service to 'totalrecall.99cluster.com'
+ *
+ *  - startGame(name, email)
+ *  - - CORS proxy (http://cors-anywhere.herokuapp.com/) is used to get Safari and
+ *  - - Mobile Safari working. Current browser implementation is not working with
+ *  - - current server setup.
+ *  
+ *  - endGame(remainingCards)
+ *
+ *  - guess(x, y)
+ */
+
 angular.module('totalrecallApp')
 
     .factory('TotalRecallApi', function ($http, $q) {
@@ -61,6 +75,34 @@ angular.module('totalrecallApp')
                     });
 
                 });
+
+                return deferred.promise;
+
+            },
+
+            endGame: function (remainingCards) {
+
+                var deferred = $q.defer(),
+                    postData = '';
+
+                remainingCards.forEach(function (card, key) {
+                    postData += 'x' + (key+1) + '=' + card.x + '&';
+                    postData += 'y' + (key+1) + '=' + card.y + '&';
+                });
+
+                $http({
+                    method: 'POST',
+                    url: domain + '/games/' + gameId + '/end',
+                    data: postData.slice(0, - 1),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).success(function(response) {
+
+                    deferred.resolve(response);
+
+                });
+
 
                 return deferred.promise;
 

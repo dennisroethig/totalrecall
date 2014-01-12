@@ -38,8 +38,8 @@ angular.module('totalrecallApp')
 
         $scope.$watch('solved' , function () {
 
-            var postData = '',
-                remainingCards;
+            var remainingCards,
+                request;
 
             remainingCards = $scope.cards.filter(function( obj ) {
                 return obj.resolved === false;
@@ -50,22 +50,22 @@ angular.module('totalrecallApp')
                 remainingCards.forEach(function (card, key) {
                     card.state = 'solved';
                     card.resolved = true;
-                    postData += 'x' + (key+1) + '=' + card.x + '&';
-                    postData += 'y' + (key+1) + '=' + card.y + '&';
                 });
 
-                $http({
-                    method: 'POST',
-                    url: gameUrl + '/games/' + gameId + '/end',
-                    data: postData.slice(0, - 1),
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                request = TotalRecallApi.endGame(remainingCards);
+                
+                request.then(function (response) {
+                    var message;
+
+                    if (response.success) {
+                        message = 'Your score: ' + $scope.score;
+                    } else {
+                        message = null; // currently not possible; needed when time can run out for user
                     }
-                }).success(function(response, status) {
 
                     $rootScope.$broadcast('overlay:show', {
                         title: response.message,
-                        text: 'Your score: ' + $scope.score,
+                        text: message,
                         cta: {
                             text: 'Start again',
                             event: 'game:new'
@@ -79,8 +79,6 @@ angular.module('totalrecallApp')
         });
 
         $scope.checkCard = function (card) {
-
-            console.log('currentStep', currentStep);
 
             if (!card.resolved && !card.flipped) {
 
