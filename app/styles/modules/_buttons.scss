@@ -1,22 +1,44 @@
 .button {
 
-	width: 100%;
-	background-color: $LIGHTNING-BLUE;
-	border: none;
-	border-radius: 3px;
-	padding: 0.5em 0.4em;
-	font-size: 1em;
+	display: inline-block;
+	background-color: $BUTTON-BACKGROUND-COLOR;
+	border: 1px solid $BUTTON-BORDER-COLOR;
+	border-radius: $BUTTON-BORDER-SIZE;
+	padding: 0.45em 0.8em;
 	text-align: center;
+
+	font-size: 1.1em;
+    font-family: inherit;
+
+	color: $BUTTON-FONT-COLOR;
 	text-transform: capitalize;
 	appearance: none;
-	-webkit-appearance: none;
+	outline: none;
+	transition: 0.3s;
+	cursor: pointer;
 
 	&:hover {
 		@include box-shadow(#fff 0 0 5px);
+		background-color: $BUTTON-BACKGROUND-COLOR-HOVER;
 	}
 
 	&:active {
-		background-color: red;
+		background-color: $BUTTON-BACKGROUND-COLOR-HOVER;
 	}
 
+}
+
+.button_large {
+	font-size: 1.2em;
+	padding: 0.7em 1em;
+}
+
+.button_small {
+	font-size: 0.9em;
+	padding: 0.4em;
+}
+
+.button_expand {
+	display: block;
+	width: 100%;
 }

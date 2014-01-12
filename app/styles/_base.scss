@@ -4,37 +4,31 @@
     box-sizing: border-box; 
 }
 
-
-html {
-
-}
-
+// Set site-wide default styles
 body {
     font-size: 16px;
-    background-color: #000;
-    font-family: 'VT323', cursive;
+    font-family: $BODY-FONT-FAMILY;
+    background-color: $BODY-BACKGROUND-COLOR;
+    color: $BODY-FONT-COLOR;
 }
 
-
+// Set application container styles
 .game-container {
-
     position: relative;
     z-index: 1;
     padding-bottom: 2em;
-
 }
 
+// Content modules used as wrapper for text and input elements
 .content_module {
-
     color: #fff;
     max-width: 280px;
     margin: 1.5em auto 0 auto;
     padding: 0 1em;
-
 }
 
 
-
+// Default heading styles
 h1 {
     font-size: 2.2em;
     margin-bottom: 0.3em;
@@ -60,13 +54,17 @@ h6 {
     margin-bottom: 1em;
 }
 
+// Default input styles
 input[type="text"] {
-    padding: 0.5em 0.4em;
-    // border-color: #e5e5e5;
-    background: #fff;
+    font-size: 1.1em;
+    font-family: inherit;
+    background: $INPUT-BACKGROUND-COLOR;
+    border: 1px solid $INPUT-BORDER-COLOR;
+    border-radius: $INPUT-BORDER-SIZE;
+    padding: 0.45em 0.8em;
 
-    border-radius: 3px;
-    font-size: 1em;
-    border: 1px solid #bfbfbf;
-
+    &:focus {
+        outline: none;
+        border: 1px solid $INPUT-BORDER-COLOR-FOCUS;
+    }
 }

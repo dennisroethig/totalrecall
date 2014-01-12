@@ -1,26 +1,26 @@
+// Compass
 @import 'compass';
 @import 'compass/reset';
 
+// Settings
 @import 'mixins';
 @import 'colors';
 @import 'variables';
 
+// Base styles
 @import 'base';
 
+// Site-wide modules
 @import 'modules/buttons';
+@import 'modules/overlay';
+
+// Game view modules
 @import 'modules/cardboard';
 @import 'modules/card';
 @import 'modules/loader';
-@import 'modules/overlay';
 @import 'modules/rules';
 @import 'modules/scoreboard';
 @import 'modules/timer';
+
+// New game view modules
 @import 'modules/user-details';
-
-
-
-
-
-
-
-

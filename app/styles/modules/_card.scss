@@ -1,48 +1,47 @@
-// CARD MODULE
+// Card styles
 .card {
     position: relative;
-    width: 20%;
+    width: $CARD-WIDTH;
     height: 0;
-    padding-bottom: 20%;
-    border: 1px solid $CARD-BORDER-COLOR;
+    padding-bottom: $CARD-WIDTH;
+    border: $CARD-BORDER-WIDTH solid $CARD-BORDER-COLOR;
     float: left;
 
     &:hover {
         cursor: pointer;
     }
-    
 }
 
-
-// OUTER FRAME
-.card__outer-frame {
-    position: absolute;
-    perspective: 1000;
+// Set card inner elements dimensions
+.card__outer-frame,
+.card__inner-frame,
+.card__side {
     width: 100%;
     height: 100%;
 }
 
+// Outer frame keeps perspective while flipping
+.card__outer-frame {
+    position: absolute;
+    perspective: 1000;
+}
 
-// INNER FRAME
+// Inner frame makes transition for card flip
 .card__inner-frame {
     position: relative;
     transition: 0.6s;
     transform-style: preserve-3d;
-    width: 100%;
-    height: 100%;
 }
 
-
-// FRONT & BACKSIDE
+// Set styles to front & back side
 .card__side {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     backface-visibility: hidden;
 }
 
+// Front side visible before flipping
 .card__side--front {
     color: $CARD-FRONT-TEXT-COLOR;
     z-index: 2;
@@ -50,19 +49,19 @@
 
 }
 
+// Back side hidden before flipping
 .card__side--back {
     color: $CARD-BACK-TEXT-COLOR;
     transform: rotateY(180deg);
     background-color: $CARD-SIDE-BACK-COLOR;
 }
 
-
-// CARD ICONS
+// Position icons on front & back side
 .card__icon {
-    color: inherit;
-    font-size: 2em;
-    left: 50%;
     position: absolute;
+    color: inherit;
+    font-size: $CARD-ICON-FONT-SIZE;
+    left: 50%;
     top: 50%;
     margin-top: -0.5em;
     margin-left: -50%;
@@ -70,42 +69,39 @@
     text-align: center;
 }
 
-
-// LOADER WRAPPER
+// Position loader according to card icons
 .card__loader {
-    color: inherit;
-    font-size: 2em;
-    left: 50%;
     position: absolute;
+    font-size: $CARD-ICON-FONT-SIZE;
+    left: 50%;
     top: 50%;
     margin-top: -0.5em;
     margin-left: -50%;
     width: 100%;
     text-align: center;
-    z-index: 111;
 }
 
 
-// FLIPPED STATE
+// Special styles while card is flipped: show back side and hide front-side
 .card--flipped__inner-frame {
     transform: rotateY(180deg);
 }
 
 
-// SOLVED STATE
-.card--solved {
+// Special styles for matched card
+.card--matched {
     background-color: transparent;
     @include box-shadow($CARD-BORDER-COLOR 0 0 10px inset);
 }
-.card--solved__outer-frame {
+.card--matched__outer-frame {
     background: transparent;
 }
-.card--solved__inner-frame {
+.card--matched__inner-frame {
     transform: rotateY(180deg);
 }
-.card--solved__side {
+.card--matched__side {
     background: transparent;
 }
-.card--solved__icon {
-    color: $CARD-SOLVED-TEXT-COLOR;
+.card--matched__icon {
+    color: $CARD-MATCHED-TEXT-COLOR;
 }

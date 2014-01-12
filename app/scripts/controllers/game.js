@@ -196,7 +196,7 @@ angular.module('totalrecallApp')
                 // If two cards are visible compare their values
                 if (cards.visible.length === 2) {
 
-                    // If values match go to next level and mark cards as solved, if not increase guess count
+                    // If values match go to next level and mark cards as matched, if not increase guess count
                     if (cards.visible[0].value === cards.visible[1].value) {
                         nextLevel();
                     } else {
@@ -215,13 +215,13 @@ angular.module('totalrecallApp')
         // GO TO NEXT LEVEL
         function nextLevel() {
 
-            // Update scope (solved count && Level)
+            // Update scope (matched count && Level)
             $scope.matched++;
             $scope.level++;
 
-            // Set matched cards to solved
+            // Set matched cards to matched
             cards.visible.forEach(function (card, index) {
-                card.state = 'solved';
+                card.state = 'matched';
                 card.matched = true;
             });
 
