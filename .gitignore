@@ -3,5 +3,6 @@ dist
 .tmp
 .DS_Store
 .sass-cache
+.ftppass
 app/bower_components
 gems

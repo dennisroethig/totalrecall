@@ -102,7 +102,7 @@ module.exports = function (grunt) {
         // Add vendor prefixed styles
         autoprefixer: {
             options: {
-                browsers: ['last 1 version', 'ie 8', 'ie 9', 'ie 10', 'ie 11']
+                browsers: ['last 1 version', 'ie 10', 'ie 11']
             },
             dist: {
                 files: [{
@@ -122,7 +122,17 @@ module.exports = function (grunt) {
             }
         },
 
-
+        'ftp-deploy': {
+            build: {
+                auth: {
+                    host: 'roethig.it',
+                    port: 21,
+                    authKey: 'ftpkey'
+                },
+                src: '<%= yeoman.dist %>',
+                dest: '/htdocs/totalrecall'
+            }
+        },
 
 
         // Compiles Sass to CSS and generates necessary files if requested
@@ -329,6 +339,11 @@ module.exports = function (grunt) {
         'rev',
         'usemin',
         'htmlmin'
+    ]);
+
+    grunt.registerTask('deploy', [
+        'build',
+        'ftp-deploy',
     ]);
 
     grunt.registerTask('default', [
